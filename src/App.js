@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Person from './Person/Person';
+import styled from 'styled-components'
+
 import logo from './logo.svg';
 import './App.css';
 
@@ -51,9 +53,26 @@ nameChangedhandler=(event,id)=>{
 }
   render() {
     let persons = null
+    const style = {
+      backgroundColor:'green',
+      color:'white',
+      font:'inherit',
+      border:'1px solid blue',
+      paddin:'8px',
+      cursor:'pointer',
+
+      ':hover':{
+        backgroundColor:'lightgreen',
+        color:'black'
+      }
+      
+
+    };
+    
     if(this.state.showPerson){
 
     persons =(
+    
       <div>
         {
           this.state.persons.map((person,index) => {
@@ -71,7 +90,20 @@ nameChangedhandler=(event,id)=>{
       <Person name={this.state.persons[2].name} age={this.state.persons[2].age}>Hobbies: Nothing</Person>
  */}
       </div>
-    )  
+      
+    );
+    style.backgroundColor = 'red';  
+    style[':hover']= {
+      backgroundColor:'lightred',
+      color:'black'
+    }
+    }
+    let classes = [];
+    if(this.state.persons<=2){
+      classes.push('red');
+    }
+    if(this.state.persons<=1){
+      classes.push('bold')
     }
     return (
       <div className="App">
@@ -89,8 +121,11 @@ nameChangedhandler=(event,id)=>{
           Learn React
         </a> */}
       </header>
-      <h1>Teste My React JS</h1>
-      <button onClick={this.toggleHandler}>Switch Name </button>
+      <h1 >Teste My React JS</h1>
+      <p className={classes.join(' ')}>Teste My React JS</p>
+      <button
+      style={style}
+      onClick={this.toggleHandler}>Switch Name </button>
      {persons}
 
     </div>
